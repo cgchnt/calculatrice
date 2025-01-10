@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .calculatrice {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .ecran {
+            width: 100%;
+            height: 40px;
+            font-size: 20px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .boutons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .bouton {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .bouton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculatrice">
+        <input type="text" id="ecran" class="ecran" readonly>
+        <div class="boutons">
+            <button class="bouton" onclick="ajouterValeur('7')">7</button>
+            <button class="bouton" onclick="ajouterValeur('8')">8</button>
+            <button class="bouton" onclick="ajouterValeur('9')">9</button>
+            <button class="bouton" onclick="ajouterValeur('/')">/</button>
+            <button class="bouton" onclick="ajouterValeur('4')">4</button>
+            <button class="bouton" onclick="ajouterValeur('5')">5</button>
+            <button class="bouton" onclick="ajouterValeur('6')">6</button>
+            <button class="bouton" onclick="ajouterValeur('*')">*</button>
+            <button class="bouton" onclick="ajouterValeur('1')">1</button>
+            <button class="bouton" onclick="ajouterValeur('2')">2</button>
+            <button class="bouton" onclick="ajouterValeur('3')">3</button>
+            <button class="bouton" onclick="ajouterValeur('-')">-</button>
+            <button class="bouton" onclick="ajouterValeur('0')">0</button>
+            <button class="bouton" onclick="ajouterValeur('.')">.</button>
+            <button class="bouton" onclick="calculerResultat()">=</button>
+            <button class="bouton" onclick="ajouterValeur('+')">+</button>
+            <button class="bouton" onclick="effacerEcran()" style="grid-column: span 4; background-color: #dc3545;">C</button>
+        </div>
+    </div>
+
+    <script>
+        function ajouterValeur(valeur) {
+            document.getElementById('ecran').value += valeur;
+        }
+
+        function effacerEcran() {
+            document.getElementById('ecran').value = '';
+        }
+
+        function calculerResultat() {
+            try {
+                const expression = document.getElementById('ecran').value;
+                const resultat = eval(expression);
+                document.getElementById('ecran').value = resultat;
+            } catch (e) {
+                alert('Erreur dans l\'expression');
+                effacerEcran();
+            }
+        }
+    </script>
+</body>
+</html>
